@@ -17,7 +17,7 @@ jobs:
           python-version: '3.11'
 
       - name: Build APK with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v2
+        uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
           command: buildozer android debug
