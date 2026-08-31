@@ -26,7 +26,14 @@ android.api = 34
 android.minapi = 24
 android.ndk = 25b
 android.accept_sdk_license = True
-android.archs = arm64-v8a, armeabi-v7a
+# Building a single architecture avoids a python-for-android issue where
+# building two archs in one run reuses the same temp build venv across
+# both passes without resetting it, occasionally corrupting pip's own
+# internals partway through the second arch (ImportError referencing
+# pip._internal.exceptions). arm64-v8a alone covers the overwhelming
+# majority of real Android devices from the last ~8 years; armeabi-v7a
+# (32-bit ARM) only matters for pre-2015 hardware.
+android.archs = arm64-v8a
 
 # Avoid Android 10+ scoped storage issues for the simple file picker approach.
 android.allow_backup = True
