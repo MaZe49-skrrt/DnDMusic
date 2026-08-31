@@ -18,7 +18,12 @@ fullscreen = 0
 android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE,READ_MEDIA_AUDIO
 
 android.api = 34
-android.minapi = 23
+# preadv()/pwritev() (used by CPython's remote-debugging support, compiled
+# in by default) are only declared in Android's libc from API 24 onward.
+# API 23 fails to build with an implicit-declaration error; 24 covers
+# effectively all real-world devices (Android 7.0, released 2016+) so
+# there's no meaningful compatibility trade-off.
+android.minapi = 24
 android.ndk = 25b
 android.accept_sdk_license = True
 android.archs = arm64-v8a, armeabi-v7a
